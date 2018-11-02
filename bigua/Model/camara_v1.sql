@@ -116,9 +116,30 @@ CREATE TABLE camara_v1.obter_detalhes_deputado_filiacoes_partidarias (
 	sigla_partido_posterior		TEXT,
 	nome_partido_posterior		TEXT,
 	data_filiacao_partido_posterior	DATE,
-	hora_filiacao_partido_posterior	STRING,	
+	hora_filiacao_partido_posterior	TEXT,	
 	data_captura            	TIMESTAMP,
 	url_captura             	TEXT
 );
 
 CREATE INDEX ide_cadastro_obter_detalhes_deputado_filiacoes_partidarias ON camara_v1.obter_detalhes_deputado_filiacoes_partidarias (ide_cadastro);
+
+
+CREATE TABLE camara_v1.obter_detalhes_deputado_hitorico_lider (	
+	ide_cadastro			INT,
+	nome_parlamentar_atual		TEXT,
+	partido_atual_id_partido	TEXT,
+	uf_representacao_atual		TEXT,
+	id_historico_lider		INT,
+	id_cargo_lideranca		TEXT,
+	descricao_cargo_lideranca	TEXT,
+	num_ordem_cargo			INT,
+	data_designacao			DATE,
+	data_termino			DATE,
+	codigo_unidade_lideranca	TEXT,
+	sigla_unidade_lideranca		TEXT,
+	id_bloco_partido		TEXT,	
+	data_captura            	TIMESTAMP,
+	url_captura             	TEXT
+);
+
+CREATE INDEX ide_cadastro_obter_detalhes_deputado_hitorico_lider ON camara_v1.obter_detalhes_deputado_hitorico_lider (ide_cadastro);
