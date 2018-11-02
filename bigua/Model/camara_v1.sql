@@ -65,6 +65,7 @@ CREATE TABLE camara_v1.obter_detalhes_deputado_comissoes (
 );
 
 CREATE INDEX id_orgao_legislativo_cd_obter_detalhes_deputados_comissoes ON camara_v1.obter_detalhes_deputado_comissoes (id_orgao_legislativo_cd);
+CREATE INDEX ide_cadastro_obter_detalhes_deputados_comissoes ON camara_v1.obter_detalhes_deputados_comissoes (ide_cadastro);
 
 
 CREATE TABLE camara_v1.obter_detalhes_deputado_comissoes_cargos (
@@ -84,6 +85,8 @@ CREATE TABLE camara_v1.obter_detalhes_deputado_comissoes_cargos (
 );
 
 CREATE INDEX id_orgao_legislativo_cd_obter_detalhes_deputados_comissoes_cargos ON camara_v1.obter_detalhes_deputado_comissoes_cargos (id_orgao_legislativo_cd);
+CREATE INDEX ide_cadastro_obter_detalhes_deputados_comissoes_cargos ON camara_v1.obter_detalhes_deputados_comissoes_cargos (ide_cadastro);
+
 
 
 CREATE TABLE camara_v1.obter_detalhes_deputado_periodos_exercicio (	
