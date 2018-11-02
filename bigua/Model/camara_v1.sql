@@ -18,6 +18,8 @@ CREATE TABLE camara_v1.obter_deputados (
 	email                   TEXT,
     data_captura            TIMESTAMP,
     url_captura             TEXT
-)
+);
+
+CREATE INDEX ide_cadastro_idx ON camara_v1.obter_deputados (ide_cadastro);
 
 
