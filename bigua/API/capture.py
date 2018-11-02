@@ -1,20 +1,24 @@
+import requests
+import sqlalchemy
+import xmltodict
+from sqlalchemy import create_engine, MetaData
+from collections import defaultdict
+import datetime
+
 class Capture(object):
     
     def __init__(self,
-                 url, 
                  schema,
-                 table,
                  database='projetocurio'
                  ):
         
-        self.url = url
+
         self.schema = schema
-        self.table = table
         self.database = database
         self.engine = self.connect_to_db()
         self.meta = self.load_db_schema()
-        self.table_string = schema + '.' + table
         
+        self.url = None
         self.data = None
 
     def connect_to_db(self):
@@ -26,9 +30,9 @@ class Capture(object):
         metadata.reflect(self.engine, schema='camara_v1')
         return metadata
 
-    def request(self):
+    def request(self, url):
 
-        data = requests.get(self.url)
+        data = requests.get(url)
 
         if data.status_code == 200:
             self.data = data.text
@@ -41,15 +45,16 @@ class Capture(object):
     def to_default_dict(self, list_of_dic):
         return [defaultdict(lambda: None, dic) for dic in list_of_dic]
     
-    def prepare_data(self):
+    def capture_data(self, url):
         
-        self.request()
+        self.request(url)
         self.xml_to_dict()
     
-    def insert_data(self, list_of_dic):
+    def insert_data(self, list_of_dic, table):
         
+        table_string = self.schema + '.' + table
         with self.engine.connect() as conn:
             print('inserting data')
             for dic in list_of_dic:
-                conn.execute(self.meta.tables[self.table_string].insert(), dic)
+                conn.execute(self.meta.tables[table_string].insert(), dic)
             print('closing connection')

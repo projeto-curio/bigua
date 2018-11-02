@@ -1,6 +1,12 @@
-from API.capture import Capture
+import sys
+import datetime
+from pathlib import Path 
+current_path = Path(__file__).absolute()
+abs_path = str(current_path.parent.parent)
+sys.path.append(abs_path)
+from capture import Capture
 
-def from_api_to_db_obter_deputados(data, url):
+def from_api_to_db_obter_deputados(data_list, url):
     
     func = lambda datum: dict(
         ide_cadastro=datum['ideCadastro'],
@@ -27,20 +33,23 @@ def from_api_to_db_obter_deputados(data, url):
 def main():
 
     capture = Capture(
-        url='http://www.camara.leg.br/SitCamaraWS/Deputados.asmx/ObterDeputados',
-        schema='camara_v1',
-        table='obter_dgit eputados',)
-    
-    capture.prepare_data()
+            schema='camara_v1',)
 
-    # Faça coisas aqui embaixo
+    # capture data with this
+    capture.capture_data(
+        url='http://www.camara.leg.br/SitCamaraWS/Deputados.asmx/ObterDeputados')
+
+    # get the list of dict for this table
     data_list = capture.data['deputados']['deputado'] 
 
-    # Also this
-    data_list = capture.to_default_dict(data_list)  # Isso está pronto
-    data_list = from_api_to_db_obter_deputados(data, capture.url) 
+    # 
+    data_list = capture.to_default_dict(data_list) 
 
-    capture.insert_data(data_list) # Insert Data
+    # make it rigth
+    data_list = from_api_to_db_obter_deputados(data_list, capture.url) 
+
+    # insert it!
+    capture.insert_data(data_list, table='obter_deputados')
 
 if __name__ == '__main__':
     main()
