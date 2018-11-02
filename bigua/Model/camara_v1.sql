@@ -42,9 +42,26 @@ CREATE TABLE camara_v1.obter_detalhes_deputado (
 	ganinete_anexo			INT,
 	gabinete_telefone		TEXT,
 	situacao_na_legislatura_atual	TEXT,
-	data_captura            TIMESTAMP,
-	url_captura             TEXT
+	data_captura            	TIMESTAMP,
+	url_captura             	TEXT
 );
 
 CREATE INDEX ide_cadastro_idx_obter_detalhes_deputados ON camara_v1.obter_detalhes_deputados (ide_cadastro);
 
+
+CREATE TABLE camara_v1.obter_detalhes_deputado_comissoes (
+	ide_cadastro			INT,
+	nome_parlamentar_atual		TEXT,
+	partido_atual_id_partido	TEXT,
+	uf_representacao_atual		TEXT,
+	id_orgao_legislativo_cd		INT,
+	sigla_comissao			TEXT,
+	nome_comissao			TEXT,
+	condicao_membro			TEXT,
+	data_entrada			DATE,
+	data_saida			DATE,
+	data_captura            	TIMESTAMP,
+	url_captura             	TEXT
+);
+
+CREATE INDEX id_orgao_legislativo_cd_obter_detalhes_deputados_comissoes ON camara_v1.obter_detalhes_deputado_comissoes (id_orgao_legislativo_cd);
