@@ -84,3 +84,23 @@ CREATE TABLE camara_v1.obter_detalhes_deputado_comissoes_cargos (
 );
 
 CREATE INDEX id_orgao_legislativo_cd_obter_detalhes_deputados_comissoes_cargos ON camara_v1.obter_detalhes_deputado_comissoes_cargos (id_orgao_legislativo_cd);
+
+
+CREATE TABLE camara_v1.obter_detalhes_deputado_periodos_exercicio (	
+	ide_cadastro				INT,
+	nome_parlamentar_atual			TEXT,
+	partido_atual_id_partido		TEXT,
+	situacao_exercicio			TEXT,
+	sigla_uf_representacao			TEXT,
+	data_inicio				DATE,
+	data_fim				DATE,
+	id_causa_fim_exercicio			INT,
+	descricao_causa_fim_exercicio		TEXT,
+	id_cadastro_parlamentar_anterior	INT,	
+	data_captura            		TIMESTAMP,
+	url_captura             		TEXT
+);
+
+CREATE INDEX ide_cadastro_obter_detalhes_deputado_periodos_exercicio ON camara_v1.obter_detalhes_deputado_periodos_exercicio (ide_cadastro);
+
+
