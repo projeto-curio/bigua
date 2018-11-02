@@ -104,3 +104,21 @@ CREATE TABLE camara_v1.obter_detalhes_deputado_periodos_exercicio (
 CREATE INDEX ide_cadastro_obter_detalhes_deputado_periodos_exercicio ON camara_v1.obter_detalhes_deputado_periodos_exercicio (ide_cadastro);
 
 
+CREATE TABLE camara_v1.obter_detalhes_deputado_filiacoes_partidarias (	
+	ide_cadastro			INT,
+	nome_parlamentar_atual		TEXT,
+	partido_atual_id_partido	TEXT,
+	uf_representacao_atual		TEXT,
+	id_partido_anterior		TEXT,
+	sigla_partido_anterior		TEXT,
+	nome_partido_anterior		TEXT,
+	id_partido_posterior		TEXT,
+	sigla_partido_posterior		TEXT,
+	nome_partido_posterior		TEXT,
+	data_filiacao_partido_posterior	DATE,
+	hora_filiacao_partido_posterior	STRING,	
+	data_captura            	TIMESTAMP,
+	url_captura             	TEXT
+);
+
+CREATE INDEX ide_cadastro_obter_detalhes_deputado_filiacoes_partidarias ON camara_v1.obter_detalhes_deputado_filiacoes_partidarias (ide_cadastro);
