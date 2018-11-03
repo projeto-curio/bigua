@@ -21,5 +21,3 @@ CREATE TABLE camara_v1.obter_deputados (
 );
 
 CREATE INDEX ide_cadastro_idx ON camara_v1.obter_deputados (ide_cadastro);
-
-
