@@ -6,7 +6,7 @@ abs_path = str(current_path.parent.parent)
 sys.path.append(abs_path)
 from capture import Capture
 
-def from_api_to_db_obter_deputados(data_list, url):
+def from_api_to_db_deputados(data_list, url):
     
     func = lambda datum: dict(
         ide_cadastro=datum['ideCadastro'],
@@ -46,10 +46,10 @@ def main():
     data_list = capture.to_default_dict(data_list) 
 
     # make it rigth
-    data_list = from_api_to_db_obter_deputados(data_list, capture.url) 
+    data_list = from_api_to_db_deputados(data_list, capture.url) 
 
     # insert it!
-    capture.insert_data(data_list, table='obter_deputados')
+    capture.insert_data(data_list, table='deputados')
 
 if __name__ == '__main__':
     main()

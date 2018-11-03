@@ -1,6 +1,6 @@
 CREATE SCHEMA camara_v1;
 
-CREATE TABLE camara_v1.obter_deputados (
+CREATE TABLE camara_v1.deputados (
 	ide_cadastro            INT,
 	cod_orcamento           INT,
 	condicao                TEXT,
@@ -20,10 +20,10 @@ CREATE TABLE camara_v1.obter_deputados (
 	url_captura             TEXT
 );
 
-CREATE INDEX ide_cadastro_idx_obter_deputados ON camara_v1.obter_deputados (ide_cadastro);
+CREATE INDEX ide_cadastro_idx_deputados ON camara_v1.deputados (ide_cadastro);
 
 
-CREATE TABLE camara_v1.obter_detalhes_deputado (
+CREATE TABLE camara_v1.detalhes_deputado (
 	ide_cadastro			INT,
 	id_parlamentar_deprecated	INT,
 	num_legislatura			INT,
@@ -46,10 +46,10 @@ CREATE TABLE camara_v1.obter_detalhes_deputado (
 	url_captura             	TEXT
 );
 
-CREATE INDEX ide_cadastro_idx_obter_detalhes_deputado ON camara_v1.obter_detalhes_deputado (ide_cadastro);
+CREATE INDEX ide_cadastro_idx_detalhes_deputado ON camara_v1.detalhes_deputado (ide_cadastro);
 
 
-CREATE TABLE camara_v1.obter_detalhes_deputado_comissoes (
+CREATE TABLE camara_v1.detalhes_deputado_comissoes (
 	ide_cadastro			INT,
 	nome_parlamentar_atual		TEXT,
 	partido_atual_id_partido	TEXT,
@@ -64,11 +64,11 @@ CREATE TABLE camara_v1.obter_detalhes_deputado_comissoes (
 	url_captura             	TEXT
 );
 
-CREATE INDEX id_orgao_legislativo_cd_obter_detalhes_deputado_comissoes ON camara_v1.obter_detalhes_deputado_comissoes (id_orgao_legislativo_cd);
-CREATE INDEX ide_cadastro_obter_detalhes_deputado_comissoes ON camara_v1.obter_detalhes_deputado_comissoes (ide_cadastro);
+CREATE INDEX id_orgao_legislativo_cd_detalhes_deputado_comissoes ON camara_v1.detalhes_deputado_comissoes (id_orgao_legislativo_cd);
+CREATE INDEX ide_cadastro_detalhes_deputado_comissoes ON camara_v1.detalhes_deputado_comissoes (ide_cadastro);
 
 
-CREATE TABLE camara_v1.obter_detalhes_deputado_comissoes_cargos (
+CREATE TABLE camara_v1.detalhes_deputado_comissoes_cargos (
 	ide_cadastro			INT,
 	nome_parlamentar_atual		TEXT,
 	partido_atual_id_partido	TEXT,
@@ -84,12 +84,12 @@ CREATE TABLE camara_v1.obter_detalhes_deputado_comissoes_cargos (
 	url_captura             	TEXT
 );
 
-CREATE INDEX id_orgao_legislativo_cd_obter_detalhes_deputado_comissoes_cargos ON camara_v1.obter_detalhes_deputado_comissoes_cargos (id_orgao_legislativo_cd);
-CREATE INDEX ide_cadastro_obter_detalhes_deputado_comissoes_cargos ON camara_v1.obter_detalhes_deputado_comissoes_cargos (ide_cadastro);
+CREATE INDEX id_orgao_legislativo_cd_detalhes_deputado_comissoes_cargos ON camara_v1.detalhes_deputado_comissoes_cargos (id_orgao_legislativo_cd);
+CREATE INDEX ide_cadastro_detalhes_deputado_comissoes_cargos ON camara_v1.detalhes_deputado_comissoes_cargos (ide_cadastro);
 
 
 
-CREATE TABLE camara_v1.obter_detalhes_deputado_periodos_exercicio (	
+CREATE TABLE camara_v1.detalhes_deputado_periodos_exercicio (	
 	ide_cadastro				INT,
 	nome_parlamentar_atual			TEXT,
 	partido_atual_id_partido		TEXT,
@@ -104,10 +104,10 @@ CREATE TABLE camara_v1.obter_detalhes_deputado_periodos_exercicio (
 	url_captura             		TEXT
 );
 
-CREATE INDEX ide_cadastro_obter_detalhes_deputado_periodos_exercicio ON camara_v1.obter_detalhes_deputado_periodos_exercicio (ide_cadastro);
+CREATE INDEX ide_cadastro_detalhes_deputado_periodos_exercicio ON camara_v1.detalhes_deputado_periodos_exercicio (ide_cadastro);
 
 
-CREATE TABLE camara_v1.obter_detalhes_deputado_filiacoes_partidarias (	
+CREATE TABLE camara_v1.detalhes_deputado_filiacoes_partidarias (	
 	ide_cadastro			INT,
 	nome_parlamentar_atual		TEXT,
 	partido_atual_id_partido	TEXT,
@@ -124,10 +124,10 @@ CREATE TABLE camara_v1.obter_detalhes_deputado_filiacoes_partidarias (
 	url_captura             	TEXT
 );
 
-CREATE INDEX ide_cadastro_obter_detalhes_deputado_filiacoes_partidarias ON camara_v1.obter_detalhes_deputado_filiacoes_partidarias (ide_cadastro);
+CREATE INDEX ide_cadastro_detalhes_deputado_filiacoes_partidarias ON camara_v1.detalhes_deputado_filiacoes_partidarias (ide_cadastro);
 
 
-CREATE TABLE camara_v1.obter_detalhes_deputado_hitorico_lider (	
+CREATE TABLE camara_v1.detalhes_deputado_hitorico_lider (	
 	ide_cadastro			INT,
 	nome_parlamentar_atual		TEXT,
 	partido_atual_id_partido	TEXT,
@@ -145,4 +145,4 @@ CREATE TABLE camara_v1.obter_detalhes_deputado_hitorico_lider (
 	url_captura             	TEXT
 );
 
-CREATE INDEX ide_cadastro_obter_detalhes_deputado_hitorico_lider ON camara_v1.obter_detalhes_deputado_hitorico_lider (ide_cadastro);
+CREATE INDEX ide_cadastro_detalhes_deputado_hitorico_lider ON camara_v1.detalhes_deputado_hitorico_lider (ide_cadastro);

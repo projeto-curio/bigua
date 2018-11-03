@@ -10,7 +10,7 @@ from capture import Capture
 from utils import *
 
 
-def from_api_to_db_obter_deputados_detalhes(data_list, url):
+def from_api_to_db_deputados_detalhes(data_list, url):
     
     func = lambda datum: dict(
          num_legislatura=                datum['numLegislatura'],
@@ -36,7 +36,7 @@ def from_api_to_db_obter_deputados_detalhes(data_list, url):
     
     return map(func, data_list)
 
-def from_api_to_db_obter_deputados_detalhes_comissoes(data_list, url, data_generic):
+def from_api_to_db_deputados_detalhes_comissoes(data_list, url, data_generic):
     
     func = lambda datum: dict(
         ide_cadastro=                    data_generic['ideCadastro'],
@@ -56,7 +56,7 @@ def from_api_to_db_obter_deputados_detalhes_comissoes(data_list, url, data_gener
     return map(func, data_list)
 
 
-def from_api_to_db_obter_deputados_detalhes_cargo_comissoes(data_list, url, data_generic):
+def from_api_to_db_deputados_detalhes_cargo_comissoes(data_list, url, data_generic):
     
     func = lambda datum: dict(
         ide_cadastro=                    data_generic['ideCadastro'],
@@ -78,7 +78,7 @@ def from_api_to_db_obter_deputados_detalhes_cargo_comissoes(data_list, url, data
     return map(func, data_list)
         
     
-def from_api_to_db_obter_deputados_detalhes_periodo_exercicio(data_list, url, data_generic):
+def from_api_to_db_deputados_detalhes_periodo_exercicio(data_list, url, data_generic):
     
     func = lambda datum: dict(
         ide_cadastro=                     data_generic['ideCadastro'],
@@ -100,7 +100,7 @@ def from_api_to_db_obter_deputados_detalhes_periodo_exercicio(data_list, url, da
     return map(func, data_list)
         
 
-def from_api_to_db_obter_deputados_detalhes_filiacao_partidaria(data_list, url, data_generic):
+def from_api_to_db_deputados_detalhes_filiacao_partidaria(data_list, url, data_generic):
     
     func = lambda datum: dict(
         ide_cadastro=                     data_generic['ideCadastro'],
@@ -121,7 +121,7 @@ def from_api_to_db_obter_deputados_detalhes_filiacao_partidaria(data_list, url, 
     
     return map(func, data_list)
         
-def from_api_to_db_obter_deputados_detalhes_historico_lider(data_list, url, data_generic):
+def from_api_to_db_deputados_detalhes_historico_lider(data_list, url, data_generic):
     
     func = lambda datum: dict(
         ide_cadastro=                     data_generic['ideCadastro'],
@@ -148,7 +148,7 @@ def from_api_to_db_obter_deputados_detalhes_historico_lider(data_list, url, data
 def urls_generator(capture, base_url):
     
     with capture.engine.connect() as conn:
-        result = conn.execute("select distinct ide_cadastro from camara_v1.obter_deputados")
+        result = conn.execute("select distinct ide_cadastro from camara_v1.deputados")
     
     for row in result:
         yield base_url.format(row[0])
@@ -175,8 +175,8 @@ def main():
             print('deputados detalhes')
             data_list = data_legislatura
             data_list = capture.to_default_dict(data_list) 
-            data_list = from_api_to_db_obter_deputados_detalhes(data_list, url)
-            capture.insert_data(data_list, table='obter_detalhes_deputado')
+            data_list = from_api_to_db_deputados_detalhes(data_list, url)
+            capture.insert_data(data_list, table='detalhes_deputado')
 
             data_generic = capture.data['Deputados']['Deputado']
 
@@ -186,8 +186,8 @@ def main():
             if data_legislatura['comissoes'] is not None:
                 data_list = data_legislatura['comissoes']['comissao']
                 data_list = capture.to_default_dict(data_list) 
-                data_list = from_api_to_db_obter_deputados_detalhes_comissoes(data_list, url, data_legislatura)
-                capture.insert_data(data_list, table='obter_detalhes_deputado_comissoes')
+                data_list = from_api_to_db_deputados_detalhes_comissoes(data_list, url, data_legislatura)
+                capture.insert_data(data_list, table='detalhes_deputado_comissoes')
 
             # cargo comissoes
             print()
@@ -195,8 +195,8 @@ def main():
             if data_legislatura['cargosComissoes'] is not None:
                 data_list = data_legislatura['cargosComissoes']['cargoComissoes']
                 data_list = capture.to_default_dict(data_list) 
-                data_list = data_list = from_api_to_db_obter_deputados_detalhes_comissoes(data_list, url, data_legislatura)
-                capture.insert_data(data_list, table='obter_detalhes_deputado_comissoes_cargos')
+                data_list = data_list = from_api_to_db_deputados_detalhes_comissoes(data_list, url, data_legislatura)
+                capture.insert_data(data_list, table='detalhes_deputado_comissoes_cargos')
 
             # periodo exercicio
             print()
@@ -204,8 +204,8 @@ def main():
             if data_legislatura['periodosExercicio'] is not None:
                 data_list = data_legislatura['periodosExercicio']['periodoExercicio']
                 data_list = capture.to_default_dict(data_list) 
-                data_list = from_api_to_db_obter_deputados_detalhes_periodo_exercicio(data_list, url, data_legislatura)
-                capture.insert_data(data_list, table='obter_detalhes_deputado_periodos_exercicio')
+                data_list = from_api_to_db_deputados_detalhes_periodo_exercicio(data_list, url, data_legislatura)
+                capture.insert_data(data_list, table='detalhes_deputado_periodos_exercicio')
 
             # filiacao partidaria
             print()
@@ -213,8 +213,8 @@ def main():
             if data_legislatura['filiacoesPartidarias'] is not None:
                 data_list = data_legislatura['filiacoesPartidarias']['filiacaoPartidaria']
                 data_list = capture.to_default_dict(data_list) 
-                data_list = from_api_to_db_obter_deputados_detalhes_filiacao_partidaria(data_list, url, data_legislatura)
-                capture.insert_data(data_list, table='obter_detalhes_deputado_filiacoes_partidarias')
+                data_list = from_api_to_db_deputados_detalhes_filiacao_partidaria(data_list, url, data_legislatura)
+                capture.insert_data(data_list, table='detalhes_deputado_filiacoes_partidarias')
 
 
             # historico lider
@@ -223,8 +223,8 @@ def main():
             if data_legislatura['historicoLider'] is not None:
                 data_list = data_legislatura['historicoLider']['itemHistoricoLider']
                 data_list = capture.to_default_dict(data_list) 
-                data_list = from_api_to_db_obter_deputados_detalhes_historico_lider(data_list, url, data_legislatura)
-                capture.insert_data(data_list, table='obter_detalhes_deputado_hitorico_lider')
+                data_list = from_api_to_db_deputados_detalhes_historico_lider(data_list, url, data_legislatura)
+                capture.insert_data(data_list, table='detalhes_deputado_hitorico_lider')
 
 if __name__ == '__main__':
     main()
