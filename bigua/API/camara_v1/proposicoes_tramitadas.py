@@ -10,7 +10,7 @@ from utils import *
 
 def force_datetime(string):
 
-    if len(string.split(' ')) == 0:
+    if len(string) <= 10:
         string = string + ' 00:00:00'
     
     return to_date(string, '%d/%m/%Y %H:%M:%S')
@@ -36,7 +36,7 @@ def urls_generator(capture, base_url):
         result = list(conn.execute("select MAX(data_captura) from camara_v1.proposicoes_tramitadas_periodo"))
 
     if result[0][0] is None:
-        dtInicio = datetime.datetime.strftime(datetime.datetime.now() - datetime.timedelta(days=1), '%d/%m/%Y')
+        dtInicio = datetime.datetime.strftime(datetime.datetime.now() - datetime.timedelta(days=6), '%d/%m/%Y')
         dtFim = datetime.datetime.strftime(datetime.datetime.now(), '%d/%m/%Y')
     else:
         dtInicio = datetime.datetime.strftime(result[0][0], '%d/%m/%Y')
