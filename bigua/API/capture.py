@@ -4,6 +4,7 @@ import xmltodict
 from sqlalchemy import create_engine, MetaData
 from collections import defaultdict
 import datetime
+from pathlib import Path
 from utils import *
 
 class Capture(object):
@@ -23,7 +24,7 @@ class Capture(object):
         self.data = None
 
     def connect_to_db(self):
-        return create_engine('postgresql://uploaddata:VgyBhu876%%%@104.155.150.247:5432/projetocurio')
+        return create_engine(open(Path(__file__).absolute().parent.parent.parent / 'dbconfig.txt', 'r').read())
 
     def load_db_schema(self):
 
