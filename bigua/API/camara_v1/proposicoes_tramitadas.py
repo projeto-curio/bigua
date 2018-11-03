@@ -15,7 +15,7 @@ def force_datetime(string):
     
     return to_date(string, '%d/%m/%Y %H:%M:%S')
 
-def from_api_to_db(data_list, url):
+def from_api_to_db(data_list, url, numero_captura):
     
     func = lambda datum: dict(
         cod_proposicao=          datum['codProposicao'],
@@ -25,7 +25,8 @@ def from_api_to_db(data_list, url):
         data_tramitacao=         force_datetime(datum['dataTramitacao']),
         data_alteracao=          to_date(datum['dataAlteracao'], '%d/%m/%Y %H:%M:%S'),
         data_captura=            datetime.datetime.now(),
-        url_captura=             url
+        url_captura=             url,
+        numero_captura=          numero_captura
         )
 
     return map(func, data_list)
@@ -33,16 +34,20 @@ def from_api_to_db(data_list, url):
 
 def urls_generator(capture, base_url):
     with capture.engine.connect() as conn:
-        result = list(conn.execute("select MAX(data_captura) from camara_v1.proposicoes_tramitadas_periodo"))
-
-    if result[0][0] is None:
+        result = list(conn.execute("select MAX(data_captura), numero_captura \
+                                     from camara_v1.proposicoes_tramitadas_periodo \
+                                     group by numero_captura"))
+    print(result)
+    if not len(result):
         dtInicio = datetime.datetime.strftime(datetime.datetime.now() - datetime.timedelta(days=6), '%d/%m/%Y')
         dtFim = datetime.datetime.strftime(datetime.datetime.now(), '%d/%m/%Y')
+        numero_captura = 1
     else:
         dtInicio = datetime.datetime.strftime(result[0][0], '%d/%m/%Y')
         dtFim = datetime.datetime.strftime(datetime.datetime.now(), '%d/%m/%Y')
+        numero_captura = int(result[0][1]) + 1
 
-    return base_url.format(dtInicio=dtInicio, dtFim=dtFim)
+    return base_url.format(dtInicio=dtInicio, dtFim=dtFim), numero_captura
 
 def main():
 
@@ -50,8 +55,8 @@ def main():
 
     # capture data with this
     base_url = 'http://www.camara.leg.br/SitCamaraWS/Proposicoes.asmx/ListarProposicoesTramitadasNoPeriodo?dtInicio={dtInicio}&dtFim={dtFim}'
-    url = urls_generator(capture, base_url)
-    print(url)
+    url, numero_captura = urls_generator(capture, base_url)
+    print(url, numero_captura)
     try:
         capture.capture_data(url)
     except TypeError:
@@ -65,7 +70,7 @@ def main():
     data_list = capture.to_default_dict(data_list) 
 
     # make it rigth
-    data_list = from_api_to_db(data_list, capture.url) 
+    data_list = from_api_to_db(data_list, url, numero_captura) 
 
     # insert it!
     capture.insert_data(data_list, table='proposicoes_tramitadas_periodo')

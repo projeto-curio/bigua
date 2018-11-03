@@ -159,3 +159,20 @@ CREATE TABLE camara_v1.partidos (
 );
 
 CREATE INDEX id_partido_partidos ON camara_v1.partidos (id_partido);
+
+CREATE TABLE camara_v1.proposicoes_tramitadas_periodo(
+	cod_proposicao    INT,
+	tipo_proposicao   TEXT,
+	numero            INT,
+	ano               INT,
+	data_tramitacao   TIMESTAMP,
+	data_alteracao    TIMESTAMP,
+	data_captura      TIMESTAMP,
+	url_captura       TEXT,
+	numero_captura    INT
+);
+
+CREATE INDEX cod_proposicao_proposicoes_tramitadas ON camara_v1.proposicoes_tramitadas_periodo (cod_proposicao);
+CREATE INDEX data_tramitacao_proposicoes_tramitadas ON camara_v1.proposicoes_tramitadas_periodo (data_tramitacao);
+CREATE INDEX data_captura_proposicoes_tramitadas ON camara_v1.proposicoes_tramitadas_periodo (data_captura);
+CREATE INDEX numero_captura_proposicoes_tramitadas ON camara_v1.proposicoes_tramitadas_periodo (numero_captura);
