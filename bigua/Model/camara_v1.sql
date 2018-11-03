@@ -146,3 +146,16 @@ CREATE TABLE camara_v1.detalhes_deputado_hitorico_lider (
 );
 
 CREATE INDEX ide_cadastro_detalhes_deputado_hitorico_lider ON camara_v1.detalhes_deputado_hitorico_lider (ide_cadastro);
+
+
+CREATE TABLE camara_v1.partidos (
+  id_partido        TEXT,
+  sigla_partido     TEXT,
+  nome_partido      TEXT,
+  data_criacao      DATE,
+  data_extincao     DATE,
+	data_captura      TIMESTAMP,
+	url_captura       TEXT
+);
+
+CREATE INDEX id_partido_partidos ON camara_v1.partidos (id_partido);
