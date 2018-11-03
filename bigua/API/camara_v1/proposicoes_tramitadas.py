@@ -8,17 +8,10 @@ sys.path.append(abs_path)
 from capture import Capture
 from utils import *
 
-def force_datetime(string):
-
-    if len(string) <= 10:
-        string = string + ' 00:00:00'
-    
-    return to_date(string, '%d/%m/%Y %H:%M:%S')
-
 def from_api_to_db(data_list, url, numero_captura):
     
     func = lambda datum: dict(
-        cod_proposicao=          datum['codProposicao'],
+        id_proposicao=           datum['codProposicao'],
         tipo_proposicao=         datum['tipoProposicao'],
         numero=                  datum['numero'],
         ano=                     datum['ano'],
@@ -66,7 +59,6 @@ def main():
     # get the list of dict for this table
     data_list = capture.data['proposicoes']['proposicao']
 
-    # 
     data_list = capture.to_default_dict(data_list) 
 
     # make it rigth

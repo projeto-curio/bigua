@@ -161,7 +161,7 @@ CREATE TABLE camara_v1.partidos (
 CREATE INDEX id_partido_partidos ON camara_v1.partidos (id_partido);
 
 CREATE TABLE camara_v1.proposicoes_tramitadas_periodo(
-	cod_proposicao    INT,
+	id_proposicao    INT,
 	tipo_proposicao   TEXT,
 	numero            INT,
 	ano               INT,
@@ -172,7 +172,42 @@ CREATE TABLE camara_v1.proposicoes_tramitadas_periodo(
 	numero_captura    INT
 );
 
-CREATE INDEX cod_proposicao_proposicoes_tramitadas ON camara_v1.proposicoes_tramitadas_periodo (cod_proposicao);
+CREATE INDEX id_proposicao_proposicoes_tramitadas ON camara_v1.proposicoes_tramitadas_periodo (id_proposicao);
 CREATE INDEX data_tramitacao_proposicoes_tramitadas ON camara_v1.proposicoes_tramitadas_periodo (data_tramitacao);
 CREATE INDEX data_captura_proposicoes_tramitadas ON camara_v1.proposicoes_tramitadas_periodo (data_captura);
 CREATE INDEX numero_captura_proposicoes_tramitadas ON camara_v1.proposicoes_tramitadas_periodo (numero_captura);
+
+CREATE TABLE camara_v1.proposicoes(
+	nome_proposicao           TEXT,
+	id_proposicao             INT,
+	id_proposicao_principal   INT,
+	nome_proposicao_origem    TEXT,
+	tipo_proposicao           TEXT,
+	tema                      TEXT,
+	ementa                    TEXT,
+	explicacao_ementa         TEXT,
+	autor                     TEXT,
+	ide_cadastro              INT,
+	uf_autor                  TEXT,
+	partido_autor             TEXT,
+	data_apresentacao         DATE,
+	regime_tramitacao         TEXT,
+	tipo_proposicao_sigla     TEXT,
+	numero_proposicao         INT,
+	ano_proposicao            INT,
+	ultimo_despacho_data      DATE,
+	ultimo_despacho           TEXT,
+	apreciacao                TEXT,
+	indexacao                 TEXT,
+	situacao                  TEXT,
+	link_inteiro_teor         TEXT,
+	data_captura              TIMESTAMP,
+	url_captura               TEXT	
+)
+
+CREATE INDEX id_proposicao_proposicoes ON camara_v1.proposicoes (id_proposicao);
+CREATE INDEX tipo_proposicao_proposicoes ON camara_v1.proposicoes (tipo_proposicao);
+CREATE INDEX ide_cadastro_proposicoes ON camara_v1.proposicoes (ide_cadastro);
+CREATE INDEX data_apresentacao_proposicoes ON camara_v1.proposicoes (data_apresentacao);
+CREATE INDEX ano_proposicao_proposicoes ON camara_v1.proposicoes (ano_proposicao);
+CREATE INDEX numero_proposicao_proposicoes ON camara_v1.proposicoes (numero_proposicao);
