@@ -4,6 +4,7 @@ import xmltodict
 from sqlalchemy import create_engine, MetaData
 from collections import defaultdict
 import datetime
+from utils import *
 
 class Capture(object):
     
@@ -43,7 +44,8 @@ class Capture(object):
         self.data = xmltodict.parse(self.data)
 
     def to_default_dict(self, list_of_dic):
-        return [defaultdict(lambda: None, dic) for dic in list_of_dic]
+
+        return [defaultdict(lambda: None, dic) for dic in force_list(list_of_dic)]
     
     def capture_data(self, url):
         
