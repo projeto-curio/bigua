@@ -105,3 +105,6 @@ venv.bak/
 
 # jupyter
 .ipynb
+
+# config
+dbconfig.txt
