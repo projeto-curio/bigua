@@ -49,7 +49,7 @@ def main():
     data_list = from_api_to_db_deputados(data_list, capture.url) 
 
     # insert it!
-    capture.insert_data(data_list, table='deputados')
+    capture.insert_data(data_list, table_name'deputados')
 
 if __name__ == '__main__':
     main()

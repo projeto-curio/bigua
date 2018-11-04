@@ -212,7 +212,7 @@ CREATE INDEX data_apresentacao_proposicoes ON camara_v1.proposicoes (data_aprese
 CREATE INDEX ano_proposicao_proposicoes ON camara_v1.proposicoes (ano_proposicao);
 CREATE INDEX numero_proposicao_proposicoes ON camara_v1.proposicoes (numero_proposicao);
 
-CREATE TABLE proposicoes_votadas_plenario (
+CREATE TABLE camara_v1.proposicoes_votadas_plenario (
 	id_proposicao     INT,
 	nome_proposicao   TEXT,
 	data_votacao      DATE,
@@ -225,3 +225,46 @@ CREATE INDEX id_proposicao_proposicoes_votadas_plenario ON camara_v1.proposicoes
 CREATE INDEX data_votacao_proposicoes_votadas_plenario ON camara_v1.proposicoes_votadas_plenario (data_votacao);
 CREATE INDEX numero_captura_proposicoes_votadas_plenario ON camara_v1.proposicoes_votadas_plenario (numero_captura);
 
+CREATE TABLE camara_v1.votacao_proposicao_orientacao (
+	id_proposicao            INT,
+	tipo_proposicao_sigla    TEXT,
+	numero_proposicao        INT,
+	ano_proposicao           INT,
+	resumo_votacao           TEXT,
+	data_votacao             DATE,
+	hora_votacao             TIME,
+	objeto_votacao           TEXT,
+	cod_sessao               TEXT,
+	sigla_partido            TEXT,
+	orientacao_partido       TEXT,
+	data_captura             TIMESTAMP,
+	url_captura              TEXT,
+	numero_captura           INT
+)
+
+CREATE INDEX id_proposicao_votacao_proposicao_orientacao ON camara_v1.votacao_proposicao_orientacao (id_proposicao);
+CREATE INDEX data_votacao_proposicao_orientacao ON camara_v1.votacao_proposicao_orientacao (data_votacao);
+CREATE INDEX numero_captura_proposicao_orientacao ON camara_v1.votacao_proposicao_orientacao (numero_captura);
+
+CREATE TABLE camara_v1.votacao_proposicao (
+	id_proposicao                    INT,
+	tipo_proposicao_sigla            TEXT,
+	numero_proposicao                INT,
+	ano_proposicao                   INT,
+	resumo_votacao                   TEXT,
+	data_votacao                     DATE,
+	hora_votacao                     TIME,
+	objeto_votacao                   TEXT,
+	cod_sessao                       TEXT,
+	nome                             TEXT,
+	ide_cadastro                     INT,
+	sigla_partido                    TEXT,
+	uf                               TEXT,
+	voto                             TEXT,
+	data_captura                     TIMESTAMP,
+	url_captura                      TEXT
+)
+
+CREATE INDEX id_proposicao_votacao_proposicao ON camara_v1.votacao_proposicao (id_proposicao);
+CREATE INDEX ide_cadastro_votacao_proposicao ON camara_v1.votacao_proposicao (ide_cadastro);
+CREATE INDEX data_votacao_votacao_proposicao ON camara_v1.votacao_proposicao (data_votacao);

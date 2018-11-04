@@ -67,8 +67,9 @@ def main():
         data_list = capture.data['proposicao']
         data_list = capture.to_default_dict(data_list) 
         data_list = from_api_to_db(data_list, url) 
-        # capture.insert_data(data_list, table='proposicoes')
-        capture.update_data(data_list, table_name='proposicoes', key='id_proposicao')
+        # capture.insert_data(data_list, table_name'proposicoes')
+        capture.insert_data(data_list, table_name='proposicoes', if_exists='replace',
+                            key='id_proposicao')
 
 if __name__ == '__main__':
     main()

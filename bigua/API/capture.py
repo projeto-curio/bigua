@@ -55,52 +55,28 @@ class Capture(object):
     
     def insert_data(self, list_of_dic, table_name, if_exists='replace', key=None):
         
-
         table_string = self.schema + '.' + table_name
         table = self.meta.tables[table_string]
 
         with self.engine.connect() as conn:
             print('inserting data')
-            
+
             for dic in list_of_dic:
-                if self.check_existing_date(table_name, key, dic[key]):
-                    if if_exists == 'replace':
-                        conn.execute(table.update(whereclause=table.c[key]==dic[key]),
-                                dic)
-                    elif if_exists == 'append':
-                        conn.execute(table.insert(), dic)
-                    elif if_exists == 'pass':
-                        pass
-                else:
+                if (key is None) or (if_exists == 'append'):
                     conn.execute(table.insert(), dic)
+                else:
+                    
+                    if len(list(conn.execute(table.select().where(table.c[key] == dic[key])))) > 0:
+                        if if_exists == 'replace':
+                            conn.execute(table.update(whereclause=table.c[key]==dic[key]),
+                                    dic)
+                        elif if_exists == 'pass':
+                            continue
+                    else:
+                        conn.execute(table.insert(), dic)
+
             
             print('closing connection')
 
-    def update_data(self, list_of_dic, table_name, key, force_insert=True):
-        
-        table_string = self.schema + '.' + table_name
-        table = self.meta.tables[table_string]
-        
-        with self.engine.connect() as conn:
-            print('updating data')
-            
-            for dic in list_of_dic:
-                if self.check_existing_date(table_name, key, dic[key]):
-                    conn.execute(table.update(whereclause=table.c[key]==dic[key]),
-                                dic)
-                elif force_insert:
-                    conn.execute(table.insert(),
-                                 dic)
-            print('closing connection')
+ 
     
-    def check_existing_date(self, table_name, key, value):
-        
-        table_string = self.schema + '.' + table_name
-        table = self.meta.tables[table_string]
-        with self.engine.connect() as conn:
-            res = list(conn.execute(table.select().where(table.c[key] == value)))
-        
-        if len(res) > 0:
-            return True
-        else:
-            return False
