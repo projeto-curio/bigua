@@ -53,13 +53,27 @@ class Capture(object):
         self.request(url)
         self.xml_to_dict()
     
-    def insert_data(self, list_of_dic, table):
+    def insert_data(self, list_of_dic, table_name, if_exists='replace', key=None):
         
-        table_string = self.schema + '.' + table
+
+        table_string = self.schema + '.' + table_name
+        table = self.meta.tables[table_string]
+
         with self.engine.connect() as conn:
             print('inserting data')
+            
             for dic in list_of_dic:
-                conn.execute(self.meta.tables[table_string].insert(), dic)
+                if self.check_existing_date(table_name, key, dic[key]):
+                    if if_exists == 'replace':
+                        conn.execute(table.update(whereclause=table.c[key]==dic[key]),
+                                dic)
+                    elif if_exists == 'append':
+                        conn.execute(table.insert(), dic)
+                    elif if_exists == 'pass':
+                        pass
+                else:
+                    conn.execute(table.insert(), dic)
+            
             print('closing connection')
 
     def update_data(self, list_of_dic, table_name, key, force_insert=True):

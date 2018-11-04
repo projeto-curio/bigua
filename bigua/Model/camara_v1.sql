@@ -211,3 +211,17 @@ CREATE INDEX ide_cadastro_proposicoes ON camara_v1.proposicoes (ide_cadastro);
 CREATE INDEX data_apresentacao_proposicoes ON camara_v1.proposicoes (data_apresentacao);
 CREATE INDEX ano_proposicao_proposicoes ON camara_v1.proposicoes (ano_proposicao);
 CREATE INDEX numero_proposicao_proposicoes ON camara_v1.proposicoes (numero_proposicao);
+
+CREATE TABLE proposicoes_votadas_plenario (
+	id_proposicao     INT,
+	nome_proposicao   TEXT,
+	data_votacao      DATE,
+	data_captura      TIMESTAMP,
+	url_captura       TEXT,
+	numero_captura    INT
+)
+
+CREATE INDEX id_proposicao_proposicoes_votadas_plenario ON camara_v1.proposicoes_votadas_plenario (id_proposicao);
+CREATE INDEX data_votacao_proposicoes_votadas_plenario ON camara_v1.proposicoes_votadas_plenario (data_votacao);
+CREATE INDEX numero_captura_proposicoes_votadas_plenario ON camara_v1.proposicoes_votadas_plenario (numero_captura);
+
