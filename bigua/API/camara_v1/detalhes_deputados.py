@@ -176,7 +176,7 @@ def main():
             data_list = data_legislatura
             data_list = capture.to_default_dict(data_list) 
             data_list = from_api_to_db_deputados_detalhes(data_list, url)
-            capture.insert_data(data_list, table_name'detalhes_deputado')
+            capture.insert_data(data_list, table_name='detalhes_deputado')
 
             data_generic = capture.data['Deputados']['Deputado']
 
@@ -187,7 +187,7 @@ def main():
                 data_list = data_legislatura['comissoes']['comissao']
                 data_list = capture.to_default_dict(data_list) 
                 data_list = from_api_to_db_deputados_detalhes_comissoes(data_list, url, data_legislatura)
-                capture.insert_data(data_list, table_name'detalhes_deputado_comissoes')
+                capture.insert_data(data_list, table_name='detalhes_deputado_comissoes')
 
             # cargo comissoes
             print()
@@ -196,7 +196,7 @@ def main():
                 data_list = data_legislatura['cargosComissoes']['cargoComissoes']
                 data_list = capture.to_default_dict(data_list) 
                 data_list = data_list = from_api_to_db_deputados_detalhes_comissoes(data_list, url, data_legislatura)
-                capture.insert_data(data_list, table_name'detalhes_deputado_comissoes_cargos')
+                capture.insert_data(data_list, table_name='detalhes_deputado_comissoes_cargos')
 
             # periodo exercicio
             print()
@@ -205,7 +205,7 @@ def main():
                 data_list = data_legislatura['periodosExercicio']['periodoExercicio']
                 data_list = capture.to_default_dict(data_list) 
                 data_list = from_api_to_db_deputados_detalhes_periodo_exercicio(data_list, url, data_legislatura)
-                capture.insert_data(data_list, table_name'detalhes_deputado_periodos_exercicio')
+                capture.insert_data(data_list, table_name='detalhes_deputado_periodos_exercicio')
 
             # filiacao partidaria
             print()
@@ -214,7 +214,7 @@ def main():
                 data_list = data_legislatura['filiacoesPartidarias']['filiacaoPartidaria']
                 data_list = capture.to_default_dict(data_list) 
                 data_list = from_api_to_db_deputados_detalhes_filiacao_partidaria(data_list, url, data_legislatura)
-                capture.insert_data(data_list, table_name'detalhes_deputado_filiacoes_partidarias')
+                capture.insert_data(data_list, table_name='detalhes_deputado_filiacoes_partidarias')
 
 
             # historico lider
@@ -224,7 +224,7 @@ def main():
                 data_list = data_legislatura['historicoLider']['itemHistoricoLider']
                 data_list = capture.to_default_dict(data_list) 
                 data_list = from_api_to_db_deputados_detalhes_historico_lider(data_list, url, data_legislatura)
-                capture.insert_data(data_list, table_name'detalhes_deputado_hitorico_lider')
+                capture.insert_data(data_list, table_name='detalhes_deputado_hitorico_lider')
 
 if __name__ == '__main__':
     main()
