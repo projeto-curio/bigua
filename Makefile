@@ -23,7 +23,7 @@ prepare:
 		--entrypoint="" \
 		$(NAME):$(TAG) chown 1000.1000 /home/kratos/.pyenv/versions
 	make services
-	
+
 # Docker builds
 # ==============================
 build: basics
@@ -38,6 +38,11 @@ services:
 	@# Create network
 	@echo -e "\e[32mCreating network...\e[0m"
 	@docker network create $(APP_NAME) >/dev/null 2>/dev/null || true
+
+repair:
+	@echo -e "\e[32mReparing...\e[0m"
+	docker rm -f db $(docker container ls -af name=$(APP_NAME)) 2>/dev/null || true
+	make basics
 
 # Interactive commands
 # ==============================

@@ -6,8 +6,8 @@ ENV APP=/app
 
 RUN apt-get update && apt-get install -y \
         aufs-tools automake build-essential curl dpkg-sig libcap-dev \
-        libsqlite3-dev virtualenv wget nano git \
-    && rm -rf /var/lib/apt/lists/*
+        libsqlite3-dev virtualenv wget nano git python3-psycopg2\
+    && rm -rf /var/lib/apt/lists/*exi
 
 # Create user
 RUN set -x \
@@ -47,5 +47,8 @@ RUN set -x \
     # Install dependencies
     && pip install -r requirements.txt
 
+# Force install psycopg2
+RUN echo 'source $USER_HOME/.pyenv/versions/venv/bin/activate' \
+    && echo 'pip install psycopg2-binary'
 
 VOLUME ["/home/kratos/.pyenv/versions"]

@@ -24,7 +24,7 @@ class Capture(object):
         self.data = None
 
     def connect_to_db(self):
-        return create_engine(open(Path(__file__).absolute().parent.parent.parent / 'dbconfig.txt', 'r').read())
+        return create_engine(open(Path(__file__).absolute().parent.parent / 'dbconfig.txt', 'r').read())
 
     def load_db_schema(self):
 
