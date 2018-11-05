@@ -1,0 +1,21 @@
+
+
+# Captura Camara V1
+
+# Deputados >> Deputados_detalhes
+0 22 * * * make camara_v1-deputados
+0 23 * * * make camara_v1-deputados_detalhes
+
+# Partidos
+0 22 * * * make camara_v1-partidos
+
+# Proposicoes_tramitadas >> Proposicoes
+0 22 * * * make camara_v1-proposicoes_tramitadas
+0 23 * * * make camara_v1-proposicoes
+
+# Proposicoes_votadas_plenario >> Votacao
+0 22 * * * make camara_v1-proposicoes_votadas_plenario
+0 23 * * * make camara_v1-votacao
+
+
+
