@@ -51,4 +51,7 @@ RUN set -x \
 RUN echo 'source $USER_HOME/.pyenv/versions/venv/bin/activate' \
     && echo 'pip install psycopg2-binary'
 
+
+ADD ./runners/*.sh /
+
 VOLUME ["/home/kratos/.pyenv/versions"]
