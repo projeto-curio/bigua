@@ -72,7 +72,7 @@ shell-root: basics
 # ==============================
 camara_v1-deputados:
 	
-	@docker run --rm -it \
+	@docker run --rm \
 		$(VOLUME_PATH) \
 		--entrypoint="" \
 		--user=$(USER_NAME) \
@@ -84,7 +84,7 @@ camara_v1-deputados:
 
 camara_v1-detalhes_deputados:
 	
-	@docker run --rm -it \
+	@docker run --rm \
 		$(VOLUME_PATH) \
 		--entrypoint="" \
 		--user=$(USER_NAME) \
@@ -96,7 +96,7 @@ camara_v1-detalhes_deputados:
 
 camara_v1-partidos:
 	
-	@docker run --rm -it \
+	@docker run --rm \
 		$(VOLUME_PATH) \
 		--entrypoint="" \
 		--user=$(USER_NAME) \
@@ -108,7 +108,7 @@ camara_v1-partidos:
 
 camara_v1-proposicoes_tramitadas:
 	
-	@docker run --rm -it \
+	@docker run --rm \
 		$(VOLUME_PATH) \
 		--entrypoint="" \
 		--user=$(USER_NAME) \
@@ -120,7 +120,7 @@ camara_v1-proposicoes_tramitadas:
 
 camara_v1-proposicoes_votadas_plenario:
 	
-	@docker run --rm -it \
+	@docker run --rm \
 		$(VOLUME_PATH) \
 		--entrypoint="" \
 		--user=$(USER_NAME) \
@@ -132,7 +132,7 @@ camara_v1-proposicoes_votadas_plenario:
 
 camara_v1-proposicoes:
 	
-	@docker run --rm -it \
+	@docker run --rm \
 		$(VOLUME_PATH) \
 		--entrypoint="" \
 		--user=$(USER_NAME) \
@@ -144,7 +144,7 @@ camara_v1-proposicoes:
 
 camara_v1-votacao:
 	
-	@docker run --rm -it \
+	@docker run --rm \
 		$(VOLUME_PATH) \
 		--entrypoint="" \
 		--user=$(USER_NAME) \
