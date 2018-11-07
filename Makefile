@@ -70,6 +70,8 @@ shell-root: basics
 
 # Captures
 # ==============================
+camara_v1-historico: camara_v1-proposicoes_historico camara_v1-detalhes_deputados_historico
+
 camara_v1-proposicoes_historico:
 	
 	@docker run --rm \
