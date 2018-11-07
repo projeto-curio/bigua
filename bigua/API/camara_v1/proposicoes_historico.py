@@ -62,13 +62,17 @@ def main():
 
     for url in urls:
         print(url)
-        capture.capture_data(url)
-    
-        data_list = capture.data['proposicao']
-        data_list = capture.to_default_dict(data_list) 
-        data_list = from_api_to_db(data_list, url) 
-        capture.insert_data(data_list, table_name='proposicoes', if_exists='replace',
-                            key='id_proposicao')
+        try:
+            capture.capture_data(url)
+        
+            data_list = capture.data['proposicao']
+            data_list = capture.to_default_dict(data_list) 
+            data_list = from_api_to_db(data_list, url) 
+            capture.insert_data(data_list, table_name='proposicoes', if_exists='replace',
+                                key='id_proposicao')
+        except Exception as e:
+            print(e)
+            continue
 
 if __name__ == '__main__':
     main()
