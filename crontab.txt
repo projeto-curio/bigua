@@ -1,10 +1,8 @@
-
-
 # Captura Camara V1
 
 # Deputados >> Deputados_detalhes
 0 22 * * * cd /home/joao_carabetta/bigua; make camara_v1-deputados
-0 23 * * * cd /home/joao_carabetta/bigua; make camara_v1-deputados_detalhes
+0 23 * * * cd /home/joao_carabetta/bigua; make camara_v1-camara_v1-detalhes_deputados
 
 # Partidos
 0 22 * * * cd /home/joao_carabetta/bigua; make camara_v1-partidos
@@ -16,6 +14,4 @@
 # Proposicoes_votadas_plenario >> Votacao
 0 22 * * * cd /home/joao_carabetta/bigua; make camara_v1-proposicoes_votadas_plenario
 0 23 * * * cd /home/joao_carabetta/bigua; make camara_v1-votacao
-
-
 
