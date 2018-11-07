@@ -268,3 +268,4 @@ CREATE TABLE camara_v1.votacao_proposicao (
 CREATE INDEX id_proposicao_votacao_proposicao ON camara_v1.votacao_proposicao (id_proposicao);
 CREATE INDEX ide_cadastro_votacao_proposicao ON camara_v1.votacao_proposicao (ide_cadastro);
 CREATE INDEX data_votacao_votacao_proposicao ON camara_v1.votacao_proposicao (data_votacao);
+
