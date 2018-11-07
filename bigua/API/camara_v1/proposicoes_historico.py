@@ -45,7 +45,6 @@ def from_api_to_db(data_list, url):
 
 def urls_generator(capture, base_url):
     
-    print(current_path.parent / 'data' / 'all_ids.csv')
     with open(current_path.parent / 'data' / 'all_ids.csv') as csv_file:
         csv_reader = csv.DictReader(csv_file)
         ids = [row['idproposicao'] for row in csv_reader]

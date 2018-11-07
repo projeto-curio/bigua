@@ -150,7 +150,7 @@ def urls_generator(capture, base_url):
     
     with open(current_path.parent / 'data' / 'all_idecadastro.csv') as csv_file:
         csv_reader = csv.DictReader(csv_file)
-        ids = [row['\ufeffidecadastro'] for row in csv_reader]
+        ids = [row['idecadastro'] for row in csv_reader]
 
     return set(map(lambda x: base_url.format(x), ids))
 
