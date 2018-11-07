@@ -70,6 +70,18 @@ shell-root: basics
 
 # Captures
 # ==============================
+camara_v1-proposicoes_historico:
+	
+	@docker run --rm \
+		$(VOLUME_PATH) \
+		--entrypoint="" \
+		--user=$(USER_NAME) \
+		--network $(APP_NAME) \
+		--name $(APP_NAME)-shell-$$RANDOM \
+		--workdir /app/API/camara_v1/ \
+		$(NAME):$(TAG) \
+		sh -c '. /home/kratos/.pyenv/versions/venv/bin/activate; python proposicoes_historico.py'
+
 camara_v1-deputados:
 	
 	@docker run --rm \
