@@ -96,6 +96,18 @@ camara_v1-detalhes_deputados_historico:
 		$(NAME):$(TAG) \
 		sh -c '. /home/kratos/.pyenv/versions/venv/bin/activate; python detalhes_deputados_historico.py'
 
+camara_v1-proposicoes_votadas_plenario_historico:
+	
+	@docker run --rm \
+		$(VOLUME_PATH) \
+		--entrypoint="" \
+		--user=$(USER_NAME) \
+		--network $(APP_NAME) \
+		--name $(APP_NAME)-shell-$$RANDOM \
+		--workdir /app/API/camara_v1/ \
+		$(NAME):$(TAG) \
+		sh -c '. /home/kratos/.pyenv/versions/venv/bin/activate; python proposicoes_votadas_plenario_historico.py'
+
 camara_v1-deputados:
 	
 	@docker run --rm \

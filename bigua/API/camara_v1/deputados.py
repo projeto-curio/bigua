@@ -30,26 +30,30 @@ def from_api_to_db_deputados(data_list, url):
     
     return map(func, data_list)
 
+def clean_table(capture):
+    
+    with capture.engine.connect() as conn:
+        result = list(conn.execute( """DELETE
+                                        FROM
+                                            camara_v1.deputados a
+                                                USING camara_v1.deputados b
+                                        WHERE
+                                            a.data_captura < b.data_captura
+                                            AND a.ide_cadastro = b.ide_cadastro;"""))
+
 def main():
 
     capture = Capture(
             schema='camara_v1',)
 
-    # capture data with this
     capture.capture_data(
         url='http://www.camara.leg.br/SitCamaraWS/Deputados.asmx/ObterDeputados')
-
-    # get the list of dict for this table
     data_list = capture.data['deputados']['deputado'] 
-
-    # 
     data_list = capture.to_default_dict(data_list) 
-
-    # make it rigth
     data_list = from_api_to_db_deputados(data_list, capture.url) 
-
-    # insert it!
     capture.insert_data(data_list, table_name='deputados')
+    clean_table(capture)
+
 
 if __name__ == '__main__':
     main()
