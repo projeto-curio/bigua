@@ -49,19 +49,20 @@ def main():
 
     for url in urls:
         print(url, numero_captura)
+        
         try:
             capture.capture_data(url)
 
-        # get the list of dict for this table
-        data_list = capture.data['proposicoes']['proposicao']
-        data_list = capture.to_default_dict(data_list) 
-        data_list = from_api_to_db(data_list, url, numero_captura) 
-        capture.insert_data(data_list, table_name='proposicoes_votadas_plenario', 
-                            if_exists='pass', key='id_proposicao')
+            # get the list of dict for this table
+            data_list = capture.data['proposicoes']['proposicao']
+            data_list = capture.to_default_dict(data_list) 
+            data_list = from_api_to_db(data_list, url, numero_captura) 
+            capture.insert_data(data_list, table_name='proposicoes_votadas_plenario', 
+                                if_exists='pass', key='id_proposicao')
 
-        except TypeError:
-            print('Not Enough Data')
-            return
+        except Exception as e:
+            print(e)
+            continue
 
 if __name__ == '__main__':
     main()
