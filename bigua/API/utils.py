@@ -31,3 +31,8 @@ def force_datetime(string):
         string = string + ' 00:00:00'
     
     return to_date(string, '%d/%m/%Y %H:%M:%S')
+
+def empty_string(string):
+
+    if not len(string):
+        return None

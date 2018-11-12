@@ -7,7 +7,7 @@ abs_path = str(current_path.parent.parent)
 sys.path.append(abs_path)
 
 from capture import Capture
-from utils import force_list, to_date
+from utils import force_list, to_date, empty_string
 
 
 def from_api_to_db_votacao_orientacao(data_list, url, data_proposicao, data_votacao, id_proposicao, numero_captura):
@@ -43,7 +43,7 @@ def from_api_to_db_votacao_deputado(data_list, url, data_proposicao, data_votaca
         objeto_votacao=                   data_votacao['@ObjVotacao'],
         cod_sessao=                       data_votacao['@codSessao'],
         nome=                             datum['@Nome'],
-        ide_cadastro=                     datum['@ideCadastro'],
+        ide_cadastro=                     empty_string(datum['@ideCadastro']),
         sigla_partido=                    datum['@Partido'],
         uf=                               datum['@UF'],
         voto=                             datum['@Voto'],
@@ -77,8 +77,6 @@ def main():
     base_url = 'http://www.camara.leg.br/SitCamaraWS/Proposicoes.asmx/ObterVotacaoProposicao?tipo={tipo}&numero={numero}&ano={ano}'
 
     url_and_ids, numero_captura = urls_generator(capture, base_url)
-
-    print(url_and_ids, numero_captura)
 
     for url, id_proposicao in url_and_ids:
         print('----')
