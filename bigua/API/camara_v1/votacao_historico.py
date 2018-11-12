@@ -94,14 +94,17 @@ def main():
         for data_votacao in force_list(data_generic):
             
             # orientacao
-            print()
-            print('orientacao')
-            data_list = data_votacao['orientacaoBancada']['bancada']
-            data_list = capture.to_default_dict(data_list) 
-            data_list = from_api_to_db_votacao_orientacao(
-                                data_list, url, data_proposicao, data_votacao,
-                                id_proposicao, numero_captura)
-            capture.insert_data(data_list, table_name='votacao_proposicao_orientacao')
+            try:
+                print()
+                print('orientacao')
+                data_list = data_votacao['orientacaoBancada']['bancada']
+                data_list = capture.to_default_dict(data_list) 
+                data_list = from_api_to_db_votacao_orientacao(
+                                    data_list, url, data_proposicao, data_votacao,
+                                    id_proposicao, numero_captura)
+                capture.insert_data(data_list, table_name='votacao_proposicao_orientacao')
+            except KeyError:
+                pass
 
             # deputados
             print()
