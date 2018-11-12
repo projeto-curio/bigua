@@ -62,18 +62,9 @@ def urls_generator(capture, base_url):
         FROM camara_v1.proposicoes 
         WHERE id_proposicao IN (
             SELECT id_proposicao
-            FROM camara_v1.proposicoes_votadas_plenario
-            WHERE numero_captura = (SELECT CASE 
-                                                WHEN MAX(numero_captura) IS NULL THEN 1
-                                                ELSE MAX(numero_captura)
-                                            END
-                                    FROM camara_v1.votacao_proposicao_orientacao))""")
+            FROM camara_v1.proposicoes_votadas_plenario)""")
 
-        numero_captura = int(list(conn.execute("""SELECT CASE 
-                                                WHEN MAX(numero_captura) IS NULL THEN 0
-                                                ELSE MAX(numero_captura)
-                                            END
-                                    FROM camara_v1.votacao_proposicao_orientacao"""))[0][0]) + 1
+        numero_captura = -1
     
     urls_and_ids = list(map(lambda row: (base_url.format(ano=row[0], numero=row[1], tipo=row[2]), row[3],), list(result)))
 
