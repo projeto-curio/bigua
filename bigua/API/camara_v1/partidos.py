@@ -30,18 +30,11 @@ def main():
     # capture data with this
     capture.capture_data(
         url='http://www.camara.leg.br/SitCamaraWS/Deputados.asmx/ObterPartidosCD')
-
-    # get the list of dict for this table
     data_list = capture.data['partidos']['partido'] 
-
-    # 
     data_list = capture.to_default_dict(data_list) 
-
-    # make it rigth
     data_list = from_api_to_db_deputados(data_list, capture.url) 
-
-    # insert it!
-    capture.insert_data(data_list, table_name='partidos')
+    capture.insert_data(data_list, table_name='partidos', if_exists='pass',
+                        key='id_partido')
 
 if __name__ == '__main__':
     main()
