@@ -120,6 +120,18 @@ camara_v1-votacao_historico:
 		$(NAME):$(TAG) \
 		sh -c '. /home/kratos/.pyenv/versions/venv/bin/activate; python votacao_historico.py'
 
+camara_v1-tramitacao_historico:
+	
+	@docker run --rm \
+		$(VOLUME_PATH) \
+		--entrypoint="" \
+		--user=$(USER_NAME) \
+		--network $(APP_NAME) \
+		--name $(APP_NAME)-shell-$$RANDOM \
+		--workdir /app/API/camara_v2/ \
+		$(NAME):$(TAG) \
+		sh -c '. /home/kratos/.pyenv/versions/venv/bin/activate; python tramitacao_historico.py'
+
 camara_v1-deputados:
 	
 	@docker run --rm \
